@@ -61,20 +61,7 @@ export function onGraphChanged(p: string, modificationType: ModificationType, va
 	if ((path[0] == "executionConnections" || path[0] == "dataConnections") && path.length == 2 && modificationType === ModificationType.CREATED) {
 		let connectionPath = document.getElementById(path[1]) as HTMLElement;
 		if (connectionPath === null) {
-			let input = document.querySelector(`[vs-node-uid="${value.input.node}"][vs-pin-uid="${value.input.pin}"]`) as HTMLElement;
-			let output = document.querySelector(`[vs-node-uid="${value.output.node}"][vs-pin-uid="${value.output.pin}"]`) as HTMLElement;
-			let inputPos = getPinPathPoint(input);
-			let outputPos = getPinPathPoint(output);
-			Graph.nodes[value.output.node]
-			VSCConnectionsSVGs.innerHTML += `<path id="${path[1]}" d="${project_preferences.pathGenerator(
-				outputPos[0],
-				outputPos[1],
-				inputPos[0],
-				inputPos[1]
-			)}"
-			vs-connection-type="${Graph.nodes[value.output.node].outputPin[value.output.pin]?.type || ""}"
-			vs-connection-execution="${(Graph.nodes[value.output.node].outputPin[value.output.pin]?.type == undefined).toString()	}">`;
-
+			createConnectionPath(path[1], value.input.node, value.input.pin, value.output.node, value.output.pin);
 		}
 	}
 	if ((path[0] == "executionConnections" || path[0] == "dataConnections") && path.length == 2 && modificationType === ModificationType.DELETED) {
@@ -83,4 +70,20 @@ export function onGraphChanged(p: string, modificationType: ModificationType, va
 			connectionPath.remove();
 		}
 	}
+}
+
+export function createConnectionPath(connectionUid: string, inputNodeUid: string, inputPinUid: string, outputNodeUid: string, outputPinUid: string): void {
+	let input = document.querySelector(`[vs-node-uid="${inputNodeUid}"][vs-pin-uid="${inputPinUid}"]`) as HTMLElement;
+	let output = document.querySelector(`[vs-node-uid="${outputNodeUid}"][vs-pin-uid="${outputPinUid}"]`) as HTMLElement;
+	let inputPos = getPinPathPoint(input);
+	let outputPos = getPinPathPoint(output);
+	Graph.nodes[outputNodeUid]
+	VSCConnectionsSVGs.innerHTML += `<path id="${connectionUid}" d="${project_preferences.pathGenerator(
+		outputPos[0],
+		outputPos[1],
+		inputPos[0],
+		inputPos[1]
+	)}"
+	vs-connection-type="${Graph.nodes[outputNodeUid].outputPin[outputPinUid]?.type || ""}"
+	vs-connection-execution="${(Graph.nodes[outputNodeUid].outputPin[outputPinUid]?.type == undefined).toString()}">`;
 }
