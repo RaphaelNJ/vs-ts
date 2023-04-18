@@ -1,9 +1,9 @@
 import { Graph } from "../core/graph";
-import { moveNode, getNodeConnections } from "../core/graph_manager";
+import { getNodeConnections } from "../core/graph_manager";
 import { ModificationType } from "../core/types";
 import { project_preferences } from "../preferences";
 import { getPinPathPoint } from "./event_listeners";
-import { VSCanvasContainer, VSCanvas, VSCanvasNavigation, VSCanvasDivs, VSCanvasSVGs, VSCConnectionsSVGs } from "./generate_environement";
+import { VSCanvas, VSCanvasNavigation, VSCanvasDivs, VSCConnectionsSVGs } from "./generate_environement";
 
 export function onGraphChanged(p: string, modificationType: ModificationType, value: any): void {
 	let path = p.split(".");

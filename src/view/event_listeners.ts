@@ -1,6 +1,6 @@
 import { Graph } from "../core/graph";
 import { project_preferences } from "../preferences";
-import { VSCanvasNavigation, VSCanvasDivs } from "./generate_environement";
+import { VSCanvasDivs } from "./generate_environement";
 import * as NodeManager from "../core/graph_manager";
 
 let isMouseDown: boolean;

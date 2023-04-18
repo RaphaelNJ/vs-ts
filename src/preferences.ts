@@ -1,7 +1,5 @@
-import { Graph } from "./core/graph";
 import { Preferences } from "./core/types";
 import { VsNode } from "./core/types";
-import { generateUID } from "./core/uid_generator";
 
 let nodeGenerator = (Node: VsNode, nodeUID: string): string => {
 	let inputPins = "";
