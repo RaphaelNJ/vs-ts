@@ -1,0 +1,27 @@
+
+path {
+	stroke-linecap: round;
+	stroke-width: 5px;
+	fill: none;
+}
+
+[vs-connection-execution="true"] {
+	stroke: rgb(255, 255, 255);
+	stroke-width: 7px;
+
+}
+[vs-connection-type="string"] {
+	stroke: #4caf50;
+}
+[vs-connection-type="boolean"] {
+	stroke: #2196f3;
+}
+[vs-connection-type="number"] {
+	stroke: #9c27b0;
+}
+[vs-connection-type="array"] {
+	stroke: #ffc107;
+}
+[vs-connection-type="object"] {
+	stroke: #ff5733;
+}

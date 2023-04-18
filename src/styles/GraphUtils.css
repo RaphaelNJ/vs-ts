@@ -32,10 +32,3 @@ body {
 	overflow: visible !important;
 	z-index: -1;
 }
-
-path {
-	stroke-linecap: round;
-	stroke: rgb(255, 0, 0);
-	stroke-width: 7px;
-	fill: none;
-}

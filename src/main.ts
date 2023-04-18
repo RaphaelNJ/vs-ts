@@ -1,6 +1,7 @@
 import "./styles/GraphUtils.css";
 import "./styles/style.css";
 import "./styles/pins.css";
+import "./styles/connections.css"
 // import typescriptLogo from './typescript.svg'
 // import viteLogo from '/vite.svg'
 // console.log(typescriptLogo, viteLogo)

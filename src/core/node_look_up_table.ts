@@ -91,6 +91,13 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 				type: "string",
 				name: "To Log",
 				description: "The message you want to log",
+			},
+			{
+				type: "object",
+				name: "To Log",
+				description: "The message you want to log",
+				defaultHardWrittenBareData: "Hello World !",
+				defaultHardWrittenVariableData: "value",
 			}],
 	},
 };

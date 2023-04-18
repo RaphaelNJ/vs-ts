@@ -71,7 +71,12 @@ function onMouseDown(event: MouseEvent): void {
 				pin: target.getAttribute("vs-pin-uid")?.toString() || "",
 				node: target.getAttribute("vs-node-uid")?.toString() || "",
 			};
-			isPanningConnection = true;
+			let isInputPin =
+				(Graph.nodes[pinConnectionPanning.node].inputPin[pinConnectionPanning.pin] ||
+					Graph.nodes[pinConnectionPanning.node].executionInputPin[pinConnectionPanning.pin]) == undefined
+					? false
+					: true;
+			isPanningConnection = !isInputPin;
 		}
 	}
 }
@@ -144,6 +149,12 @@ function onMouseMove(event: MouseEvent): void {
 		if (startPin !== null) {
 			let pathStart = getPinPathPoint(startPin as HTMLElement);
 			let pathEnd = convertCanvasPosToGraphPos([mousePos.x, mousePos.y]);
+
+			const nodeUid = startPin.getAttribute("vs-node-uid");
+			const pinUid = startPin.getAttribute("vs-pin-uid");
+
+			VSCurrentConnectionPath.setAttribute("vs-connection-type", nodeUid && pinUid ? Graph.nodes[nodeUid].outputPin[pinUid]?.type || "" : "");
+			VSCurrentConnectionPath.setAttribute("vs-connection-execution", nodeUid && pinUid ? (Graph.nodes[nodeUid].outputPin[pinUid]?.type == undefined).toString() : "");
 			VSCurrentConnectionPath.setAttribute(
 				"d",
 				project_preferences.pathGenerator(pathStart[0], pathStart[1], pathEnd[0], pathEnd[1] - pathStroke / 1.2)

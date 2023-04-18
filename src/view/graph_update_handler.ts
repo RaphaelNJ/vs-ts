@@ -35,18 +35,12 @@ export function onGraphChanged(p: string, modificationType: ModificationType, va
 							val = JSON.parse(JSON.stringify(Graph.executionConnections[e.uid]));
 						}
 
+						// move the connection
 						let input = document.querySelector(`[vs-node-uid="${val.input.node}"][vs-pin-uid="${val.input.pin}"]`) as HTMLElement;
 						let output = document.querySelector(`[vs-node-uid="${val.output.node}"][vs-pin-uid="${val.output.pin}"]`) as HTMLElement;
 						let inputPos = getPinPathPoint(input);
 						let outputPos = getPinPathPoint(output);
-						if (document.getElementById(e.uid) == null) {
-							VSCConnectionsSVGs.innerHTML += `<path id="${e.uid}" d="${project_preferences.pathGenerator(
-								outputPos[0],
-								outputPos[1],
-								inputPos[0],
-								inputPos[1]
-							)}" >`;
-						} else {
+						if (document.getElementById(e.uid) != null) {
 							document
 								.getElementById(e.uid)
 								?.setAttribute("d", project_preferences.pathGenerator(outputPos[0], outputPos[1], inputPos[0], inputPos[1]));
@@ -71,12 +65,16 @@ export function onGraphChanged(p: string, modificationType: ModificationType, va
 			let output = document.querySelector(`[vs-node-uid="${value.output.node}"][vs-pin-uid="${value.output.pin}"]`) as HTMLElement;
 			let inputPos = getPinPathPoint(input);
 			let outputPos = getPinPathPoint(output);
+			Graph.nodes[value.output.node]
 			VSCConnectionsSVGs.innerHTML += `<path id="${path[1]}" d="${project_preferences.pathGenerator(
 				outputPos[0],
 				outputPos[1],
 				inputPos[0],
 				inputPos[1]
-			)}" >`;
+			)}"
+			vs-connection-type="${Graph.nodes[value.output.node].outputPin[value.output.pin]?.type || ""}"
+			vs-connection-execution="${(Graph.nodes[value.output.node].outputPin[value.output.pin]?.type == undefined).toString()	}">`;
+
 		}
 	}
 	if ((path[0] == "executionConnections" || path[0] == "dataConnections") && path.length == 2 && modificationType === ModificationType.DELETED) {
