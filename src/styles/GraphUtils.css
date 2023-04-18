@@ -1,0 +1,41 @@
+body {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	user-select: none;
+	cursor: default;
+}
+
+#VSCanvasContainer {
+	padding: 0;
+	height: 500px;
+	width: 500px;
+	object-fit: cover;
+	overflow: hidden;
+	border: black solid 1px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#VSCanvas {
+	background-image: url(./background.png);
+}
+
+#VSCConnectionsSVGs {
+	pointer-events: none;
+	position: absolute;
+	overflow: visible !important;
+	z-index: -1;
+}
+
+path {
+	stroke-linecap: round;
+	stroke: rgb(255, 0, 0);
+	stroke-width: 7px;
+	fill: none;
+}

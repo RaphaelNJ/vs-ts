@@ -1,0 +1,52 @@
+.Node {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	min-width: 8em;
+	max-width: 19em;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	position: absolute;
+}
+
+.Node > header {
+	padding: 0.3em;
+	padding-left: 1em;
+	padding-right: 0;
+	border-radius: 1em 1em 0 0;
+	display: flex;
+	flex-wrap: nowrap;
+	background-color: green;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.NodeHeader {
+	margin-right: 1em;
+}
+.NodeCloseButton {
+	margin-right: 1em;
+	background-color: yellowgreen;
+	border: 0;
+	border-radius: 5px;
+	color: orangered;
+	width: 22px;
+	height: 22px;
+}
+
+.NodeArticle {
+	width: 100%;
+	padding-top: 0.3em;
+	background-color: rgb(179, 179, 179);
+	min-height: 2.5em;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	border-radius: 0 0 0.2em 0.2em;
+	--big-size: 25px;
+	--small-size: 20px;
+	--space: 1.5;
+}
+
+.NodeArticle > .content {
+	width: calc(100% - var(--big-size) * var(--space));
+}

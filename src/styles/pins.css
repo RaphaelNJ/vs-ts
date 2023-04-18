@@ -1,0 +1,64 @@
+.NodeArticle > .pins {
+	width: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.NodePin {
+	background-color: whitesmoke;
+	border: 1px slategray solid;
+	margin-top: 0.2em;
+	border-radius: 50%;
+	height: var(--small-size);
+	width: var(--small-size);
+}
+.NodePin.ExecutionPin {
+	height: var(--big-size);
+	width: var(--big-size);
+	background-color: whitesmoke;
+	border: 1px slategray solid;
+}
+.NodePin.ExecutionPin:hover {
+	background-color: slategray;
+	border: 1px whitesmoke solid;
+}
+.NodePin[vs-pin-type="string"] {
+	background-color: #4caf50;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="string"]:hover {
+	background-color: #388e3c;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="boolean"] {
+	background-color: #2196f3;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="boolean"]:hover {
+	background-color: #1976d2;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="number"] {
+	background-color: #9c27b0;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="number"]:hover {
+	background-color: #7b1fa2;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="array"] {
+	background-color: #ffc107;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="array"]:hover {
+	background-color: #ffa000;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="object"] {
+	background-color: #ff5733;
+	border: 1px slategray solid;
+}
+.NodePin[vs-pin-type="object"]:hover {
+	background-color: #ff7f4d;
+	border: 1px slategray solid;
+}

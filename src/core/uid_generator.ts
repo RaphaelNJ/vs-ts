@@ -1,3 +1,5 @@
+import { project_preferences } from "../preferences";
+
 export let existingIDs: string[] = [];
 export let importedExistingIDs: string[] = [];
 
@@ -14,9 +16,9 @@ export function makeID(length: number): string {
 }
 
 export function generateUID(): string {
-	let ID = makeID(7);
+	let ID = makeID(project_preferences.technical.uidLength);
 	while (existingIDs.includes(ID)) {
-		ID = makeID(7);
+		ID = makeID(project_preferences.technical.uidLength);
 	}
 	existingIDs.push(ID);
 	return ID;

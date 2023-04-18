@@ -9,11 +9,11 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 	Enter: <VsT.NodeType>{
 		title: "Enter",
 		description: "",
-		code: "",
 		otherProperties: {
 			isClosable: false,
 			isDraggable: true,
 			isResizable: false,
+			code: "",
 		},
 		x: 10,
 		y: 10,
@@ -27,14 +27,14 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 		inputPin: [],
 		outputPin: [],
 	},
-	Log: <VsT.NodeType>{
-		title: "Log 'Hello world !'",
-		description: "Log 'Hello world !'",
-		code: "console.log('Hello world !')",
+	Test: <VsT.NodeType>{
+		title: "A Test Node",
+		description: "Anim ullamco ad nulla occaecat aliquip. Mollit id veniam deserunt eu tempor qui aute ullamco adipisicing culpa eu mollit. Excepteur laborum amet dolor consequat sit sunt ullamco veniam elit ad deserunt magna ut. Minim aute ipsum eu sint sit sit voluptate occaecat pariatur.",
 		otherProperties: {
 			isClosable: true,
 			isDraggable: true,
 			isResizable: false,
+			code: "console.log('Hello world !')",
 		},
 		x: 10,
 		y: 10,
@@ -49,9 +49,49 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 				name: "Continue Execution",
 				description: "",
 			},
+			{
+				name: "2nd Continue Execution",
+				description: "",
+			},
+			{
+				name: "Execute Code",
+				description: "",
+			},
 		],
-		inputPin: [],
-		outputPin: [],
+		inputPin: [
+			{
+				type: "boolean",
+				name: "To Log",
+				description: "The message you want to log",
+				defaultHardWrittenBareData: "Hello World !",
+				defaultHardWrittenVariableData: "value",
+			},
+			{
+				type: "object",
+				name: "To Log",
+				description: "The message you want to log",
+				defaultHardWrittenBareData: "Hello World !",
+				defaultHardWrittenVariableData: "value",
+			}
+		],
+		outputPin: [
+			{
+				type: "boolean",
+				name: "To Log",
+				description: "The message you want to log",
+			},{
+				type: "array",
+				name: "To Log",
+				description: "The message you want to log",
+			},{
+				type: "array",
+				name: "To Log",
+				description: "The message you want to log",
+			},{
+				type: "string",
+				name: "To Log",
+				description: "The message you want to log",
+			}],
 	},
 };
 

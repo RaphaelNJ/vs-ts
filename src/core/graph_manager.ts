@@ -43,13 +43,11 @@ export function createNode(id: string, x: number, y: number): string {
 	Graph.nodes[uid] = {
 		title: nodeLookupTable[id].title,
 		description: nodeLookupTable[id].description,
-		x: x,
-		y: y,
+		pos: [x, y],
 		executionInputPin: executionInputPin,
 		executionOutputPin: executionOutputPin,
 		inputPin: inputPin,
 		outputPin: outputPin,
-		code: nodeLookupTable[id].code,
 		otherProperties: nodeLookupTable[id].otherProperties,
 	};
 	return uid;
@@ -82,8 +80,8 @@ export function deleteNode(id: string): void {
 	delete Graph.nodes[id];
 }
 export function moveNode(id: string, x: number, y: number): void {
-	Graph.nodes[id].x = x;
-	Graph.nodes[id].y = y;
+	let nodePos = [Graph.nodes[id].pos[0] + x, Graph.nodes[id].pos[1] + y];
+	Graph.nodes[id].pos = nodePos as [number, number];
 }
 export function changePinToConnectionMode(nodeUID: string, pinUID: string): void {
 	Graph.nodes[nodeUID].inputPin[pinUID].DataMode = 0;
@@ -235,4 +233,29 @@ export function deleteConnection(connectionUID: string): void {
 		delete Graph.executionConnections[connectionUID];
 		uidTools.removeUID(connectionUID);
 	}
+}
+export function getNodeConnections(nodeUID: string): { isInput: boolean; isData: boolean; uid: string }[] {
+	const { inputPin, outputPin, executionInputPin, executionOutputPin } = Graph.nodes[nodeUID];
+	const pins = [
+		{ pin: inputPin, isInput: true, isData: true },
+		{ pin: outputPin, isInput: false, isData: true },
+		{ pin: executionInputPin, isInput: true, isData: false },
+		{ pin: executionOutputPin, isInput: false, isData: false },
+	];
+
+	let connections: { isInput: boolean; isData: boolean; uid: string }[] = [];
+
+	for (const { pin, isInput, isData } of pins) {
+		for (const key of Object.keys(pin)) {
+			const connection = getPinConnectionUID(nodeUID, key, isInput);
+			if (connection) {
+				connections.push({
+					uid: connection.uid,
+					isInput: isInput,
+					isData: isData,
+				});
+			}
+		}
+	}
+	return connections
 }

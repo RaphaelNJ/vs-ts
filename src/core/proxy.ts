@@ -15,8 +15,9 @@ import { ModificationType } from "./types";
  *
  * This function return a JSON object exacly the same as the JSON object that was passed in
  * but this one will call the callback function that was passed in whenever a value is changed.
- * The callback will take in 1st parameter the path of the changed property
- * and 2nd parameter the modification type
+ * The callback will take in 1st parameter the path of the changed property.
+ * The 2nd parameter the modification type.
+ * And the 3rd parameter is the new value of the property or null if it was deleted.
  */
 export function createProxy<T extends object>(target: T, callback: Function, path: string = ""): T {
 	return new Proxy(target, {
@@ -44,7 +45,7 @@ export function createProxy<T extends object>(target: T, callback: Function, pat
 				target[property as keyof T] = value;
 			}
 
-			callback(`${path}${path ? "." : ""}${property}`, modificationType);
+			callback(`${path}${path ? "." : ""}${property}`, modificationType, value);
 			return true;
 		},
 		deleteProperty(target: T, property: string | symbol) {
@@ -54,7 +55,7 @@ export function createProxy<T extends object>(target: T, callback: Function, pat
 
 			const deleted = delete target[property as keyof T];
 			if (deleted) {
-				callback(`${path}${path ? "." : ""}${property}`, ModificationType.DELETED);
+				callback(`${path}${path ? "." : ""}${property}`, ModificationType.DELETED, null);
 			}
 			return deleted;
 		},

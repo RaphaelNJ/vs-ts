@@ -35,7 +35,6 @@ type NodeType = {
 	executionOutputPin: ExecutionOutputPinDetails[];
 	inputPin: DataInputPinDetails[];
 	outputPin: DataOutputPinDetails[];
-	code: string;
 	otherProperties: { [key: string]: any };
 };
 type NodeLookupTable = {
@@ -55,13 +54,14 @@ type DataInputPin = {
 type VsNode = {
 	title: string;
 	description: string;
-	x: number;
-	y: number;
+	pos: [
+		number,
+		number
+	],
 	executionInputPin: { [key: string]: ExecutionInputPinDetails };
 	executionOutputPin: { [key: string]: ExecutionOutputPinDetails };
 	inputPin: { [key: string]: DataInputPin };
 	outputPin: { [key: string]: DataOutputPinDetails };
-	code: string;
 	otherProperties: { [key: string]: any };
 };
 type ExecutionConnection = {
@@ -89,7 +89,22 @@ type Graph = {
 	nodes: { [key: string]: VsNode };
 	dataConnections: { [key: string]: DataConnection };
 	executionConnections: { [key: string]: ExecutionConnection };
+	zoom: number;
+	offset: {
+		x: number;
+		y: number;
+	}
 };
+type Preferences = {
+	zoomSteps: number;
+	zoomMin: number;
+	zoomMax: number;
+	nodeGenerator: Function; // callback that takes the type "NodeType" and returns a string of the html representation of the node.
+	pathGenerator: Function; // callback that takes the x1, y1, x2, y2 and returns a string of the html representation of the path.
+    technical : {
+        uidLength: number;
+    }
+}
 
 enum ModificationType {
 	CREATED = "created",
@@ -109,6 +124,7 @@ export type {
 	VsNode,
 	ExecutionConnection,
 	DataConnection,
-	Graph
+	Graph,
+	Preferences,
 };
 export { ModificationType };
