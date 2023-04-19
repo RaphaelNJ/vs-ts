@@ -1,9 +1,9 @@
 import { Graph } from "../core/graph";
 import { project_preferences } from "../preferences";
 import { VSCanvasDivs } from "./generate_environement";
-import * as NodeManager from "../core/graph_manager";
-import { DataConnection, ExecutionConnection } from "../core/types";
-
+import * as GraphManager from "../core/graph_manager";
+import * as Container from "./events_managers/containers_events_manager";
+import { verifIfISChildOfAProperty } from "./html_tools";
 let isMouseDown: boolean;
 let isMouseOut: boolean;
 let isMouseOnDraggableElement: boolean;
@@ -37,12 +37,19 @@ export function addEventsListeners(VSCanvasContainer: HTMLElement): void {
 	VSCanvasContainer.addEventListener("mousemove", onMouseMove);
 	VSCanvasContainer.addEventListener("contextmenu", onContextMenu);
 	VSCanvasContainer.addEventListener("wheel", onWheel);
+	VSCanvasContainer.addEventListener("change", onChange);
 }
 function onMouseDown(event: MouseEvent): void {
 	VSCurrentConnectionPath = document.getElementById("VSCurrentConnectionPath")!;
-
-	event.preventDefault();
 	const target = event.target! as HTMLElement;
+	let requiredEventListener = verifIfISChildOfAProperty(event.target as HTMLElement, "vs-keep-mouse-down");
+	if (requiredEventListener != null) {
+		if (requiredEventListener == "containier") {
+			Container.onMouseDown(event, target);
+		}
+		return;
+	}
+	event.preventDefault();
 	isMouseDown = true;
 	isMouseOut = false;
 	let uid = target.getAttribute("vs-node-uid");
@@ -53,7 +60,7 @@ function onMouseDown(event: MouseEvent): void {
 		}
 		if (target.classList.contains("NodeCloseButton")) {
 			if (uid !== null) {
-				NodeManager.deleteNode(uid);
+				GraphManager.deleteNode(uid);
 			}
 		}
 		if (target.getAttribute("vs-is-draggable")) {
@@ -79,7 +86,7 @@ function onMouseDown(event: MouseEvent): void {
 					: true;
 			isPanningConnection = !isInputPin;
 			// reroute the connection
-			let pinConnection = NodeManager.getPinConnectionUID(pinConnectionPanning.node, pinConnectionPanning.pin, true);
+			let pinConnection = GraphManager.getPinConnectionUID(pinConnectionPanning.node, pinConnectionPanning.pin, true);
 			if (pinConnection !== null) {
 				if (pinConnection.type == "execution") {
 					pinConnectionPanning = {
@@ -97,8 +104,7 @@ function onMouseDown(event: MouseEvent): void {
 				);
 				if (startPin !== null) {
 					isPanningConnection = true;
-					NodeManager.deleteConnection(pinConnection.uid);
-					console.log("s");
+					GraphManager.deleteConnection(pinConnection.uid);
 					drawCurrentConnectionPath(startPin, [mousePos.x, mousePos.y]);
 				}
 			}
@@ -106,11 +112,12 @@ function onMouseDown(event: MouseEvent): void {
 	}
 }
 function onMouseUp(event: MouseEvent): void {
+	const target = event.target! as HTMLElement; 
+	Container.onMouseUp(event, target);
 	event.preventDefault();
 	VSCurrentConnectionPath.setAttribute("d", "");
-	const target = event.target! as HTMLElement;
 	if (isPanningConnection && target.getAttribute("vs-is-pin") == "true") {
-		NodeManager.createConnection(
+		GraphManager.createConnection(
 			pinConnectionPanning.node,
 			pinConnectionPanning.pin,
 			target.getAttribute("vs-node-uid")?.toString() || "",
@@ -126,6 +133,14 @@ function onMouseUp(event: MouseEvent): void {
 	pinConnectionPanning = { pin: "", node: "" };
 }
 function onMouseLeave(event: MouseEvent): void {
+	let requiredEventListener = verifIfISChildOfAProperty(event.target as HTMLElement, "vs-keep-mouse-down");
+	const target = event.target! as HTMLElement;
+	if (requiredEventListener != null) {
+		if (requiredEventListener == "containier") {
+			Container.onMouseLeave(event, target);
+		}
+		return;
+	}
 	event.preventDefault();
 	document.querySelector('[vs-is-being-dragged="true"]')?.removeAttribute("vs-is-being-dragged");
 	isMouseOut = true;
@@ -137,11 +152,28 @@ function onMouseLeave(event: MouseEvent): void {
 	VSCurrentConnectionPath.setAttribute("d", "");
 }
 function onMouseEnter(event: MouseEvent): void {
+	let requiredEventListener = verifIfISChildOfAProperty(event.target as HTMLElement, "vs-keep-mouse-down");
+	const target = event.target! as HTMLElement;
+	if (requiredEventListener != null) {
+		if (requiredEventListener == "containier") {
+			Container.onMouseEnter(event, target);
+		}
+		return;
+	}
 	event.preventDefault();
 	lastMousePos = { x: event.clientX, y: event.clientY };
 	isMouseOut = false;
 }
 function onMouseMove(event: MouseEvent): void {
+	const target = event.target! as HTMLElement;
+	// let requiredEventListener = verifIfISChildOfAProperty(event.target as HTMLElement, "vs-keep-mouse-down");
+	// if (requiredEventListener != null) {
+	// 	if (requiredEventListener == "containier") {
+	// 		Container.onMouseMove(event, target);
+	// 	}
+	// 	return;
+	// }
+	Container.onMouseMove(event, target);
 	event.preventDefault();
 	isMouseOut = false;
 	mousePos = { x: event.clientX, y: event.clientY };
@@ -164,7 +196,7 @@ function onMouseMove(event: MouseEvent): void {
 
 			let elementUID = element.getAttribute("vs-node-uid");
 			if (elementUID !== null) {
-				NodeManager.moveNode(elementUID, elementPostion[0], elementPostion[1]);
+				GraphManager.moveNode(elementUID, elementPostion[0], elementPostion[1]);
 			} else {
 				element.style.transform = `translate(${elementPostion[0]}px, ${elementPostion[1]}px)`;
 			}
@@ -179,12 +211,33 @@ function onMouseMove(event: MouseEvent): void {
 	lastMousePos = { x: event.clientX, y: event.clientY };
 }
 function onContextMenu(event: MouseEvent): void {
+	let requiredEventListener = verifIfISChildOfAProperty(event.target as HTMLElement, "vs-keep-mouse-down");
+	const target = event.target! as HTMLElement;
+	if (requiredEventListener != null) {
+		if (requiredEventListener == "containier") {
+			Container.onContextMenu(event, target);
+		}
+		return;
+	}
 	event.preventDefault();
 	let pos = convertCanvasPosToGraphPos([event.clientX, event.clientY]);
+	if (currentNode == "Test") {
 
-	NodeManager.createNode(currentNode, pos[0], pos[1]);
+		GraphManager.createDefaultContainer(pos[0], pos[1]);
+		currentNode = "Enter"
+	} else {
+		GraphManager.createNode(currentNode, pos[0], pos[1]);
+	}
 }
 function onWheel(event: WheelEvent): void {
+	let requiredEventListener = verifIfISChildOfAProperty(event.target as HTMLElement, "vs-keep-mouse-down");
+	const target = event.target! as HTMLElement;
+	if (requiredEventListener != null) {
+		if (requiredEventListener == "containier") {
+			Container.onWheel(event, target);
+		}
+		return;
+	}
 	event.preventDefault();
 	if (event.deltaY < 0) {
 		Graph.zoom = Math.max(Graph.zoom - project_preferences.zoomSteps, project_preferences.zoomMin);
@@ -192,6 +245,18 @@ function onWheel(event: WheelEvent): void {
 		Graph.zoom = Math.min(Graph.zoom + project_preferences.zoomSteps, project_preferences.zoomMax);
 	}
 }
+function onChange(event: Event): void {
+	let requiredEventListener = verifIfISChildOfAProperty(event.target as HTMLElement, "vs-keep-mouse-down");
+	const target = event.target! as HTMLElement;
+	if (requiredEventListener != null) {
+		if (requiredEventListener == "containier") {
+			Container.onChange(event, target);
+		}
+		return;
+	}
+	event.preventDefault();
+}
+
 function updateZIndex(zindex: number): void {
 	let nodes = document.querySelectorAll(".Node");
 	nodes.forEach((node) => {

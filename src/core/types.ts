@@ -85,10 +85,28 @@ type DataConnection = {
 		pin: string;
 	};
 };
+
+type Container = {
+	pos: [
+		number,
+		number
+	];
+	size: [
+		number,
+		number
+	];
+	title: string;
+	description: string;
+	primaryColor: string;
+	secondaryColor: string;
+	otherProperties: { [key: string]: any };
+}
+
 type Graph = {
 	nodes: { [key: string]: VsNode };
 	dataConnections: { [key: string]: DataConnection };
 	executionConnections: { [key: string]: ExecutionConnection };
+	containers: { [key: string]: Container };
 	zoom: number;
 	offset: {
 		x: number;
@@ -101,9 +119,18 @@ type Preferences = {
 	zoomMax: number;
 	nodeGenerator: Function; // callback that takes the type "NodeType" and returns a string of the html representation of the node.
 	pathGenerator: Function; // callback that takes the x1, y1, x2, y2 and returns a string of the html representation of the path.
+	containerGenerator: Function; // callback that takes the type "Container" and returns a string of the html representation of the container.
     technical : {
         uidLength: number;
-    }
+    };
+	containers: {
+		defaultTitle :  string;
+		defaultDescription : string;
+		defaultPrimaryColor : string;
+		defaultSecondaryColor : string;
+		defaultSize : [number, number];
+		defaultOtherProperties: { [key: string]: any };
+	}
 }
 
 enum ModificationType {
@@ -124,6 +151,7 @@ export type {
 	VsNode,
 	ExecutionConnection,
 	DataConnection,
+	Container,
 	Graph,
 	Preferences,
 };

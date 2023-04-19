@@ -70,14 +70,48 @@ export function onGraphChanged(p: string, modificationType: ModificationType, va
 			connectionPath.remove();
 		}
 	}
+	if (path[0] == "containers" && path.length == 2 && modificationType === ModificationType.CREATED) {
+		VSCanvasDivs.innerHTML += project_preferences.containerGenerator(value, path[1]);
+	}
+	if (modificationType === ModificationType.UPDATED && path[0] == "containers") {
+		if (path.length == 3) {
+			let container = document.getElementById(path[1]) as HTMLElement;
+			if (container !== null) {
+				if (path[2] == "pos") {
+					container.style.transform = `translate(${value[0]}px, ${value[1]}px)`;
+				} else if (path[2] == "size") {
+					container.style.width = `${value[0]}px`;
+					container.style.height = `${value[1]}px`;
+				} else if (path[2] == "primaryColor") {
+					container.style.setProperty("--primary-color", value)
+				} else if (path[2] == "secondaryColor") {
+					container.style.setProperty("--secondary-color", value)
+				}
+			}
+		}
+	}
+	if (modificationType === ModificationType.DELETED && path[0] == "containers") {
+		if (path.length == 2) {
+			let container = document.getElementById(path[1]) as HTMLElement;
+			if (container !== null) {
+				VSCanvasDivs.removeChild(container);
+			}
+		}
+	}
 }
 
-export function createConnectionPath(connectionUid: string, inputNodeUid: string, inputPinUid: string, outputNodeUid: string, outputPinUid: string): void {
+export function createConnectionPath(
+	connectionUid: string,
+	inputNodeUid: string,
+	inputPinUid: string,
+	outputNodeUid: string,
+	outputPinUid: string
+): void {
 	let input = document.querySelector(`[vs-node-uid="${inputNodeUid}"][vs-pin-uid="${inputPinUid}"]`) as HTMLElement;
 	let output = document.querySelector(`[vs-node-uid="${outputNodeUid}"][vs-pin-uid="${outputPinUid}"]`) as HTMLElement;
 	let inputPos = getPinPathPoint(input);
 	let outputPos = getPinPathPoint(output);
-	Graph.nodes[outputNodeUid]
+	Graph.nodes[outputNodeUid];
 	VSCConnectionsSVGs.innerHTML += `<path id="${connectionUid}" d="${project_preferences.pathGenerator(
 		outputPos[0],
 		outputPos[1],

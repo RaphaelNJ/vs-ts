@@ -67,4 +67,7 @@ function refreshGraph(): void {
 		let dc = Graph.executionConnections[e];
 		createConnectionPath(e, dc.input.node, dc.input.pin, dc.output.node, dc.output.pin);
 	});
+	Object.keys(Graph.containers).forEach((e) => {
+		VSCanvasDivs.innerHTML += project_preferences.containerGenerator(Graph.containers[e], e);
+	})
 }

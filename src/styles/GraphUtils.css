@@ -6,14 +6,14 @@ body {
 	align-items: center;
 	height: 100vh;
 	width: 100vw;
-	user-select: none;
+	user-select: none !important;
 	cursor: default;
 }
 
 #VSCanvasContainer {
 	padding: 0;
-	height: 500px;
-	width: 500px;
+	height: 600px;
+	width: 600px;
 	object-fit: cover;
 	overflow: hidden;
 	border: black solid 1px;
