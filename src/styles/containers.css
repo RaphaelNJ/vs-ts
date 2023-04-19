@@ -5,7 +5,7 @@
 	background-color: var(--primary-color);
 	border: 1px solid var(--secondary-color);
     min-width: 200px;
-    min-height: 150px;
+    min-height: 170px;
     cursor: move;
     z-index: -2;
 }
