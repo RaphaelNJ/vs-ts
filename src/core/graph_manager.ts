@@ -4,8 +4,8 @@ import { Graph } from "./graph";
 import * as uidTools from "./uid_generator";
 import { project_preferences } from "../preferences";
 import * as Containers from "../view/events_managers/containers_events_manager";
-import 'toolcool-color-picker';
-import ColorPicker from 'toolcool-color-picker';
+import "toolcool-color-picker";
+import ColorPicker from "toolcool-color-picker";
 
 // +-----------------------------------+
 // |                                   |
@@ -120,17 +120,6 @@ export function createDefaultContainer(posX: number, posY: number): string {
 		size: project_preferences.containers.defaultSize,
 		otherProperties: project_preferences.containers.defaultOtherProperties,
 	};
-	let primaryColorPicker = document.getElementById(uid+"-pcolor") as ColorPicker;
-	let secondaryColorPicker = document.getElementById(uid+"-scolor") as ColorPicker;
-
-	primaryColorPicker.addEventListener('change', (evt: Event) => {
-		const customEvent = evt as CustomEvent;
-		Containers.onColorChanged(uid, customEvent.detail.rgba, "primary");
-	});
-	secondaryColorPicker.addEventListener('change', (evt: Event) => {
-		const customEvent = evt as CustomEvent;
-		Containers.onColorChanged(uid, customEvent.detail.rgba, "secondary");
-	});
 	return uid;
 }
 export function createContainer(
@@ -163,28 +152,43 @@ export function deleteContainer(uid: string): void {
 export function moveContainer(uid: string, x: number, y: number): void {
 	let containerPos = [Graph.containers[uid].pos[0] + x, Graph.containers[uid].pos[1] + y];
 	Object.keys(Graph.nodes).forEach((e) => {
-		let node = document.getElementById(e)
+		let node = document.getElementById(e);
 		if (node != null) {
 			let nodeSize = node.getBoundingClientRect();
-			if (checkIfNodeIsStickedToContainer(
-				Graph.containers[uid].pos[0],
-				Graph.containers[uid].pos[1],
-				Graph.containers[uid].size[0],
-				Graph.containers[uid].size[1],
-				Graph.nodes[e].pos[0],
-				Graph.nodes[e].pos[1],
-				nodeSize.width,
-				nodeSize.height
-			)) {
+			if (
+				checkIfNodeIsStickedToContainer(
+					Graph.containers[uid].pos[0],
+					Graph.containers[uid].pos[1],
+					Graph.containers[uid].size[0],
+					Graph.containers[uid].size[1],
+					Graph.nodes[e].pos[0],
+					Graph.nodes[e].pos[1],
+					nodeSize.width,
+					nodeSize.height
+				)
+			) {
 				moveNode(e, x, y);
 			}
 		}
-	})
+	});
 	Graph.containers[uid].pos = containerPos as [number, number];
 }
 export function resizeContainer(uid: string, x: number, y: number): void {
 	let containerSize = [Graph.containers[uid].size[0] + x, Graph.containers[uid].size[1] + y];
 	Graph.containers[uid].size = containerSize as [number, number];
+}
+
+export function setContainerColorListener(uid: string) {
+	let primaryColorPicker = document.getElementById(uid + "-pcolor") as ColorPicker;
+	let secondaryColorPicker = document.getElementById(uid + "-scolor") as ColorPicker;
+	primaryColorPicker.addEventListener("change", (evt: Event) => {
+		const customEvent = evt as CustomEvent;
+		Containers.onColorChanged(uid, customEvent.detail.rgba, "primary");
+	});
+	secondaryColorPicker.addEventListener("change", (evt: Event) => {
+		const customEvent = evt as CustomEvent;
+		Containers.onColorChanged(uid, customEvent.detail.rgba, "secondary");
+	});
 }
 
 export function checkIfNodeIsStickedToContainer(aX: number, aY: number, aW: number, aH: number, bX: number, bY: number, bW: number, bH: number) {
