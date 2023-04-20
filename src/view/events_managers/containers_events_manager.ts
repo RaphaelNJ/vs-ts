@@ -3,12 +3,22 @@ import { Graph } from "../../core/graph";
 import * as GraphManager from "../../core/graph_manager";
 import { verifIfISChildOfAProperty, getIdOfParentWithProperty } from "../html_tools";
 
-let isMouseDown = false;
-let lastMousePos = { x: 0, y: 0 };
-let mousePos = { x: 0, y: 0 };
-let mouseOffset = { x: 0, y: 0 };
-let containerBeingDragged: HTMLElement | null = null;
-let containerBeingResized: HTMLElement | null = null;
+let isMouseDown: boolean;
+let lastMousePos: { x:number; y:number};
+let mousePos: { x:number; y:number};
+let mouseOffset: { x:number; y:number};
+let containerBeingDragged: HTMLElement | null;
+let containerBeingResized: HTMLElement | null;
+
+export function init(): void {
+	isMouseDown = false;
+	lastMousePos = { x: 0, y: 0 };
+	mousePos = { x: 0, y: 0 };
+	mouseOffset = { x: 0, y: 0 };
+	containerBeingDragged = null;
+	containerBeingResized = null;
+}
+
 
 export function onMouseDown(event: MouseEvent, target: HTMLElement): void {
 	let uid = target.getAttribute("vs-container-uid")?.toString();
