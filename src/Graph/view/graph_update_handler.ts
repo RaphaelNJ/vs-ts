@@ -1,7 +1,7 @@
 import { Graph } from "../core/graph";
 import { getNodeConnections, setContainerColorListener } from "../core/graph_manager";
 import { ModificationType } from "../core/types";
-import { project_preferences } from "../preferences";
+import { project_preferences } from "../../preferences";
 import { getPinPathPoint } from "./events_managers/pins_events_manager";
 import { VSCanvas, VSCanvasNavigation, VSCanvasDivs, VSCConnectionsSVGs } from "./generate_environement";
 

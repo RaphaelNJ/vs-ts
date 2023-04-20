@@ -1,6 +1,6 @@
 import { Graph } from "../../core/graph";
 import * as GraphManager from "../../core/graph_manager";
-import { project_preferences } from "../../preferences";
+import { project_preferences } from "../../../preferences";
 import { convertCanvasPosToGraphPos } from "../event_listeners";
 
 let mousePos: { x: number; y: number };
@@ -79,7 +79,7 @@ export function onMouseMove(event: MouseEvent, target: HTMLElement): void {
 	if (isPanningConnection) {
 		let startPin = document.querySelector(`[vs-node-uid="${pinConnectionPanning.node}"][vs-pin-uid="${pinConnectionPanning.pin}"][vs-is-pin="true"]`);
 		if (startPin !== null) {
-			drawCurrentConnectionPath(startPin, [mousePos.x, mousePos.y]);
+			drawCurrentConnectionPath(startPin, [mousePos.x, mousePos.y+pathStroke]);
 		}
 	}
 }
@@ -92,7 +92,7 @@ export function onWheel(event: WheelEvent, target: HTMLElement): void {}
 export function getPinPathPoint(pin: HTMLElement): [number, number] {
 	let pos = convertCanvasPosToGraphPos([
 		pin.getBoundingClientRect().left + pin.getBoundingClientRect().width / 2,
-		pin.getBoundingClientRect().top + pin.getBoundingClientRect().height / 1.5,
+		pin.getBoundingClientRect().top + pin.getBoundingClientRect().height / 1.3,
 	]);
 	VSCurrentConnectionPath = document.getElementById("VSCurrentConnectionPath")!;
 	pathStroke = parseInt(window.getComputedStyle(VSCurrentConnectionPath).getPropertyValue("stroke-width").replaceAll("px", ""));

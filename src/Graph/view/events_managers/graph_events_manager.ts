@@ -1,5 +1,5 @@
 import { Graph } from "../../core/graph";
-import { project_preferences } from "../../preferences";
+import { project_preferences } from "../../../preferences";
 
 let isMouseDownOnGraph: boolean;
 let mousePos: { x: number; y: number };

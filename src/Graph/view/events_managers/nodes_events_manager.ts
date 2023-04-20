@@ -1,8 +1,6 @@
 import { Graph } from "../../core/graph";
 import * as GraphManager from "../../core/graph_manager";
-import { project_preferences } from "../../preferences";
-import { convertCanvasPosToGraphPos } from "../event_listeners";
-import { VSCanvasDivs, VSCurrentConnectionPath } from "../generate_environement";
+import { VSCurrentConnectionPath } from "../generate_environement";
 import { getIdOfParentWithProperty } from "../html_tools";
 
 let isMouseDown: boolean;
