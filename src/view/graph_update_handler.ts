@@ -1,5 +1,5 @@
 import { Graph } from "../core/graph";
-import { getNodeConnections } from "../core/graph_manager";
+import { getNodeConnections, setContainerColorListener } from "../core/graph_manager";
 import { ModificationType } from "../core/types";
 import { project_preferences } from "../preferences";
 import { getPinPathPoint } from "./event_listeners";
@@ -18,7 +18,9 @@ export function onGraphChanged(p: string, modificationType: ModificationType, va
 		VSCanvas.style.backgroundPosition = `${value.x}px ${value.y}px`;
 	}
 	if (modificationType === ModificationType.CREATED && path[0] == "nodes" && path.length == 2) {
-		VSCanvasDivs.innerHTML += project_preferences.nodeGenerator(value, path[1]);
+		let tempDiv = document.createElement('div');
+		tempDiv.innerHTML = project_preferences.nodeGenerator(value, path[1])
+		VSCanvasDivs.appendChild(tempDiv.children[0] as HTMLElement);
 	}
 	if (modificationType === ModificationType.UPDATED && path[0] == "nodes") {
 		if (path.length == 3) {
@@ -71,7 +73,10 @@ export function onGraphChanged(p: string, modificationType: ModificationType, va
 		}
 	}
 	if (path[0] == "containers" && path.length == 2 && modificationType === ModificationType.CREATED) {
-		VSCanvasDivs.innerHTML += project_preferences.containerGenerator(value, path[1]);
+		let tempDiv = document.createElement('div');
+		tempDiv.innerHTML = project_preferences.containerGenerator(value, path[1])
+		VSCanvasDivs.appendChild(tempDiv.children[0] as HTMLElement);
+		setContainerColorListener(path[1]);
 	}
 	if (modificationType === ModificationType.UPDATED && path[0] == "containers") {
 		if (path.length == 3) {

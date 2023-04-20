@@ -1,4 +1,5 @@
 import { Graph } from "../core/graph";
+import { setContainerColorListener } from "../core/graph_manager";
 import { project_preferences } from "../preferences";
 import { createConnectionPath } from "./graph_update_handler";
 
@@ -55,7 +56,9 @@ function refreshGraph(): void {
 
 	// load the nodes
 	Object.keys(Graph.nodes).forEach((e) => {
-		VSCanvasDivs.innerHTML += project_preferences.nodeGenerator(Graph.nodes[e], e);
+		let tempDiv = document.createElement('div');
+		tempDiv.innerHTML = project_preferences.nodeGenerator(Graph.nodes[e], e)
+		VSCanvasDivs.appendChild(tempDiv.children[0] as HTMLElement);
 	});
 	
 	// load the connections
@@ -68,6 +71,9 @@ function refreshGraph(): void {
 		createConnectionPath(e, dc.input.node, dc.input.pin, dc.output.node, dc.output.pin);
 	});
 	Object.keys(Graph.containers).forEach((e) => {
-		VSCanvasDivs.innerHTML += project_preferences.containerGenerator(Graph.containers[e], e);
+		let tempDiv = document.createElement('div');
+		tempDiv.innerHTML = project_preferences.containerGenerator(Graph.containers[e], e)
+		VSCanvasDivs.appendChild(tempDiv.children[0] as HTMLElement);
+		setContainerColorListener(e);
 	})
 }

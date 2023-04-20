@@ -1,3 +1,4 @@
+import ColorPicker from "toolcool-color-picker";
 import { Graph } from "../../core/graph";
 import * as GraphManager from "../../core/graph_manager";
 import { verifIfISChildOfAProperty, getIdOfParentWithProperty } from "../html_tools";

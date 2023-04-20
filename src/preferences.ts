@@ -46,7 +46,7 @@ let containerGenerator = (Container: Container, containerUID: string): string =>
 			<textarea vs-element-function="description" class="ContainerDescription" rows="3"  placeholder="Description">${Container.description}</textarea>
 			<div class="ContainerColors">
 				<div>
-					<toolcool-color-picker id="${containerUID}-pcolor" color="#${Container.primaryColor}" id="color-picker-1"></toolcool-color-picker>
+					<toolcool-color-picker id="${containerUID}-pcolor" color="${Container.primaryColor}" id="color-picker-1"></toolcool-color-picker>
 				</div>
 				<div>
 					<toolcool-color-picker id="${containerUID}-scolor" color="${Container.secondaryColor}" id="color-picker-1"></toolcool-color-picker>
