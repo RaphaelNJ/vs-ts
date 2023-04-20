@@ -2,7 +2,7 @@ import * as VsT from "./types";
 import { nodeLookupTable } from "./node_look_up_table";
 import { Graph } from "./graph";
 import * as uidTools from "./uid_generator";
-import { project_preferences } from "../preferences";
+import { project_preferences } from "../../preferences";
 import * as Containers from "../view/events_managers/containers_events_manager";
 import "toolcool-color-picker";
 import ColorPicker from "toolcool-color-picker";

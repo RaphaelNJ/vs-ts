@@ -1,6 +1,6 @@
 import { Graph } from "../core/graph";
 import { setContainerColorListener } from "../core/graph_manager";
-import { project_preferences } from "../preferences";
+import { project_preferences } from "../../preferences";
 import { createConnectionPath } from "./graph_update_handler";
 
 export let VSCanvasContainer: HTMLElement;

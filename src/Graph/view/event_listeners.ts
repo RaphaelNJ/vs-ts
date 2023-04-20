@@ -1,8 +1,6 @@
 import { Graph } from "../core/graph";
-import { project_preferences } from "../preferences";
 import { VSCanvasDivs } from "./generate_environement";
 import * as GraphManager from "../core/graph_manager";
-import { verifIfISChildOfAProperty } from "./html_tools";
 
 import {invokeCM} from "./invoke_cm"
 
@@ -10,9 +8,6 @@ import * as GraphEvents from "./events_managers/graph_events_manager";
 import * as NodesEvents from "./events_managers/nodes_events_manager";
 import * as PinsEvents from "./events_managers/pins_events_manager";
 import * as ContainersEvents from "./events_managers/containers_events_manager";
-
-// for dev pupuses:
-let currentNode = "Test";
 
 export function addEventsListeners(VSCanvasContainer: HTMLElement): void {
 	VSCanvasContainer.addEventListener("mousedown", onMouseDown);
@@ -23,6 +18,11 @@ export function addEventsListeners(VSCanvasContainer: HTMLElement): void {
 	VSCanvasContainer.addEventListener("contextmenu", onContextMenu);
 	VSCanvasContainer.addEventListener("wheel", onWheel);
 	VSCanvasContainer.addEventListener("change", onChange);
+	document.addEventListener("keydown", (event) => {
+		if(event.key == "Tab") {
+			event.preventDefault()
+		}
+	})
 
 	GraphEvents.init();
 	NodesEvents.init();

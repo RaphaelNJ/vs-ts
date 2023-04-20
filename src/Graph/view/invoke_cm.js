@@ -29,7 +29,6 @@ let elements = {
 
 
 let arrengement = [
-    "Enter",
     "Test",
     "Container"
 ]

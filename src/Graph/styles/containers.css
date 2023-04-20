@@ -3,7 +3,7 @@
 	resize: both;
 	padding: 0.5em;
 	background-color: var(--primary-color);
-	border: 1px solid var(--secondary-color);
+	outline: 1px solid var(--secondary-color);
     min-width: 200px;
     min-height: 170px;
     cursor: move;
