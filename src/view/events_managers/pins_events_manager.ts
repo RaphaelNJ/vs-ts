@@ -91,8 +91,8 @@ export function onWheel(event: WheelEvent, target: HTMLElement): void {}
  */
 export function getPinPathPoint(pin: HTMLElement): [number, number] {
 	let pos = convertCanvasPosToGraphPos([
-		pin.getBoundingClientRect().x + pin.getBoundingClientRect().width / 2,
-		pin.getBoundingClientRect().y + pin.getBoundingClientRect().height / 2,
+		pin.getBoundingClientRect().left + pin.getBoundingClientRect().width / 2,
+		pin.getBoundingClientRect().top + pin.getBoundingClientRect().height / 1.5,
 	]);
 	VSCurrentConnectionPath = document.getElementById("VSCurrentConnectionPath")!;
 	pathStroke = parseInt(window.getComputedStyle(VSCurrentConnectionPath).getPropertyValue("stroke-width").replaceAll("px", ""));

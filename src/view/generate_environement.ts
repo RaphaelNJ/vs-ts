@@ -31,7 +31,7 @@ export function initHtml(): HTMLElement {
 	VSCanvas.style.minHeight = canvasSize + "%";
 	VSCanvasSVGs.style.position = "absolute";
 
-	VSCanvasSVGs.innerHTML = '<svg id="VSCConnectionsSVGs"><path id="VSCurrentConnectionPath"></svg>';
+	VSCanvasSVGs.innerHTML = '<svg id="VSCConnectionsSVGs" height="100" width="100"><path id="VSCurrentConnectionPath"></svg>';
 	VSCanvasNavigation.appendChild(VSCanvasDivs);
 	VSCanvasNavigation.appendChild(VSCanvasSVGs);
 	VSCanvas.appendChild(VSCanvasNavigation);
