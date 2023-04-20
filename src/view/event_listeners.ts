@@ -133,14 +133,8 @@ function onMouseUp(event: MouseEvent): void {
 	pinConnectionPanning = { pin: "", node: "" };
 }
 function onMouseLeave(event: MouseEvent): void {
-	let requiredEventListener = verifIfISChildOfAProperty(event.target as HTMLElement, "vs-keep-mouse-down");
 	const target = event.target! as HTMLElement;
-	if (requiredEventListener != null) {
-		if (requiredEventListener == "containier") {
-			Container.onMouseLeave(event, target);
-		}
-		return;
-	}
+	Container.onMouseLeave(event, target);
 	event.preventDefault();
 	document.querySelector('[vs-is-being-dragged="true"]')?.removeAttribute("vs-is-being-dragged");
 	isMouseOut = true;
