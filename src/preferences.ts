@@ -18,7 +18,7 @@ let nodeGenerator = (Node: VsNode, nodeUID: string): string => {
 		outputPins += `<div class="NodePin" vs-is-pin="true" vs-pin-name="${Node.outputPin[pin].name}" vs-is-exe-pin="false" vs-pin-type="${Node.outputPin[pin].type}" vs-pin-uid="${pin}" vs-node-uid="${nodeUID}"></div>`;
 	});
 
-	return `<div class="Node" id="${nodeUID}" style="transform: translate(${Node.pos[0]}px, ${Node.pos[1]}px)">
+	return `<div vs-element-type="node" class="Node" id="${nodeUID}" style="transform: translate(${Node.pos[0]}px, ${Node.pos[1]}px)">
 	<header vs-is-draggable="true" vs-node-uid="${nodeUID}">
     <div class="NodeHeader" vs-is-draggable="true" vs-node-uid="${nodeUID}">
         ${Node.title}
