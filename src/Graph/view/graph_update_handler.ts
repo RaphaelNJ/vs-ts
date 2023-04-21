@@ -1,5 +1,5 @@
 import { Graph } from "../core/graph";
-import { getNodeConnections, setContainerColorListener } from "../core/graph_manager";
+import { getNodeConnections, setContainerColorListener, getPinConnectionUID, deleteConnection } from "../core/graph_manager";
 import { ModificationType } from "../core/types";
 import { project_preferences } from "../../preferences";
 import { getPinPathPoint } from "./events_managers/pins_events_manager";
@@ -72,6 +72,19 @@ export function onGraphChanged(p: string, modificationType: ModificationType, va
 			connectionPath.remove();
 		}
 	}
+	if ((path[0] == "nodes") && (path[2] == "inputPin") && (path[4] == "DataMode") && path.length == 5 && modificationType === ModificationType.UPDATED) {
+		let pin = (document.querySelector(`[vs-node-uid="${path[1]}"][vs-pin-uid="${path[3]}"]`) as HTMLElement);
+		pin.setAttribute('vs-pin-data-mode', value.toString());
+		if (value == 1 || value == 2) {
+			deleteConnection(getPinConnectionUID(path[1], path[3], true)?.uid || "");
+			if (value == 1) {
+				pin.setAttribute('vs-pin-data', Graph.nodes[path[1]].inputPin[path[3]].hardWrittenVariableData);
+			} else {
+				pin.setAttribute('vs-pin-data', Graph.nodes[path[1]].inputPin[path[3]].hardWrittenBareData);
+			}
+		}
+	}
+
 	if (path[0] == "containers" && path.length == 2 && modificationType === ModificationType.CREATED) {
 		let tempDiv = document.createElement('div');
 		tempDiv.innerHTML = project_preferences.containerGenerator(value, path[1])

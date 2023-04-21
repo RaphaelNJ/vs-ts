@@ -23,12 +23,12 @@ export let Graph: VsT.Graph = createProxy(
 export function saveGraph(): string {
 	return btoa(JSON.stringify({ Graph: Graph, existingIDs: importedExistingIDs }));
 }
-export function loadGraph(data: string): void {
+export function loadGraph(data: string, GraphContainer: HTMLElement): void {
 	let load = JSON.parse(atob(data));
 
 	Graph = createProxy(load.Graph,
 		onGraphChanged
 	);
 	Object.assign(importedExistingIDs, load.existingIDs);
-	addEventsListeners(initHtml());
+	addEventsListeners(initHtml(GraphContainer));
 }

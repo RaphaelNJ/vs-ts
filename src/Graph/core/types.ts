@@ -139,6 +139,14 @@ enum ModificationType {
 	DELETED = "deleted",
 }
 
+
+type VariablesList = {
+	[key: string]: {
+		type: string;
+		value: any;
+	};
+}
+
 export type {
 	PinType,
 	DataInputPinDetails,
@@ -154,5 +162,6 @@ export type {
 	Container,
 	Graph,
 	Preferences,
+	VariablesList,
 };
 export { ModificationType };

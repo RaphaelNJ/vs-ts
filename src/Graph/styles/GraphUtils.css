@@ -32,3 +32,36 @@ body {
 	overflow: visible !important;
 	z-index: -1;
 }
+
+#inputPinContextMenu {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#inputPinContextMenuPanel {
+	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#inputPinContextMenuSwitch {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+#inputPinContextMenuInputs {
+	display: flex;
+	justify-content: space-between;
+}
+
+#PinToolTip {
+	background-color: blanchedalmond;
+	position: absolute;
+	z-index: 99999999;
+	padding: 2px;
+	border: 1px black solid;
+}

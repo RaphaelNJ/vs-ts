@@ -11,7 +11,9 @@ export let VSCanvasSVGs: HTMLElement;
 export let VSCConnectionsSVGs: HTMLElement;
 export let VSCurrentConnectionPath: HTMLElement;
 
-export function initHtml(): HTMLElement {
+export let GraphContainer: HTMLElement;
+
+export function initHtml(Container: HTMLElement): HTMLElement {
 	VSCanvasContainer = document.createElement("div");
 	VSCanvas = document.createElement("div");
 	VSCanvasNavigation = document.createElement("div");
@@ -36,9 +38,10 @@ export function initHtml(): HTMLElement {
 	VSCanvasNavigation.appendChild(VSCanvasSVGs);
 	VSCanvas.appendChild(VSCanvasNavigation);
 	VSCanvasContainer.appendChild(VSCanvas);
-
-	document.querySelector<HTMLDivElement>("#app")!.innerHTML = "";
-	document.querySelector<HTMLDivElement>("#app")!.appendChild(VSCanvasContainer);
+	
+	Container.innerHTML = "";
+	Container.appendChild(VSCanvasContainer);
+	GraphContainer = Container;
 
 	VSCConnectionsSVGs = document.getElementById("VSCConnectionsSVGs")!;
 	VSCurrentConnectionPath = document.getElementById("VSCurrentConnectionPath")!;

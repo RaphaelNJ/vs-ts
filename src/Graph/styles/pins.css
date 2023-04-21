@@ -62,3 +62,7 @@
 	background-color: #ff7f4d;
 	border: 1px slategray solid;
 }
+
+.NodePin[vs-pin-data-mode="2"], .NodePin[vs-pin-data-mode="1"] {
+	border-radius: 25%;
+}

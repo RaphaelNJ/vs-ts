@@ -68,16 +68,17 @@ function onMouseMove(event: MouseEvent): void {
 }
 function onContextMenu(event: MouseEvent): void {
 	const target = event.target! as HTMLElement;
-	NodesEvents.onContextMenu(event, target);
-	PinsEvents.onContextMenu(event, target);
-	invokeCM(event.clientX, event.clientY, (out: any) => {
-		let pos = convertCanvasPosToGraphPos([out.input.x, out.input.y]);
-		if(out.elt == "Container") {
-			GraphManager.createDefaultContainer(pos[0], pos[1]);
-		} else {
-			GraphManager.createNode(out.elt,pos[0], pos[1]);
-		}
-	});
+	if (PinsEvents.onContextMenu(event, target)) {
+		invokeCM(event.clientX, event.clientY, (out: any) => {
+			let pos = convertCanvasPosToGraphPos([out.input.x, out.input.y]);
+			if(out.elt == "Container") {
+				GraphManager.createDefaultContainer(pos[0], pos[1]);
+			} else {
+				GraphManager.createNode(out.elt,pos[0], pos[1]);
+			}
+		});
+	};
+
 	event.preventDefault()
 }
 function onWheel(event: WheelEvent): void {
