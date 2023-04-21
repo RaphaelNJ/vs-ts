@@ -87,21 +87,6 @@ export function moveNode(id: string, x: number, y: number): void {
 	let nodePos = [Graph.nodes[id].pos[0] + x, Graph.nodes[id].pos[1] + y];
 	Graph.nodes[id].pos = nodePos as [number, number];
 }
-export function changePinToConnectionMode(nodeUID: string, pinUID: string): void {
-	Graph.nodes[nodeUID].inputPin[pinUID].DataMode = 0;
-}
-export function changePinToVariableDataMode(nodeUID: string, pinUID: string): void {
-	Graph.nodes[nodeUID].inputPin[pinUID].DataMode = 1;
-}
-export function changePinToBareDataMode(nodeUID: string, pinUID: string): void {
-	Graph.nodes[nodeUID].inputPin[pinUID].DataMode = 2;
-}
-export function changePinVariableData(nodeUID: string, pinUID: string, data: string): void {
-	Graph.nodes[nodeUID].inputPin[pinUID].hardWrittenVariableData = data;
-}
-export function changePinBareData(nodeUID: string, pinUID: string, data: string): void {
-	Graph.nodes[nodeUID].inputPin[pinUID].hardWrittenBareData = data;
-}
 
 // +-----------------------------------+
 // |                                   |
@@ -324,6 +309,7 @@ export function createConnection(outputNodeUID: string, outputPinUID: string, in
 					pin: inputPinUID,
 				},
 			};
+			Graph.nodes[inputNodeUID].inputPin[inputPinUID].DataMode = 0;
 		}
 		return connectionUID;
 	}

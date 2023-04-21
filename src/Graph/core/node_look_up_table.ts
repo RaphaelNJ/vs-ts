@@ -15,8 +15,6 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 			isResizable: false,
 			code: "",
 		},
-		x: 10,
-		y: 10,
 		executionInputPin: [],
 		executionOutputPin: [
 			{
@@ -36,8 +34,6 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 			isResizable: false,
 			code: "console.log('Hello world !')",
 		},
-		x: 10,
-		y: 10,
 		executionInputPin: [
 			{
 				name: "Execute Code",
@@ -63,11 +59,18 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 				type: "boolean",
 				name: "To Log",
 				description: "The message you want to log",
-				defaultHardWrittenBareData: "Hello World !",
+				defaultHardWrittenBareData: "true",
 				defaultHardWrittenVariableData: "value",
 			},
 			{
 				type: "object",
+				name: "To Log",
+				description: "The message you want to log",
+				defaultHardWrittenBareData: "{'Hello World !': 2}",
+				defaultHardWrittenVariableData: "value",
+			},
+			{
+				type: "string",
 				name: "To Log",
 				description: "The message you want to log",
 				defaultHardWrittenBareData: "Hello World !",
@@ -96,8 +99,11 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 				type: "object",
 				name: "To Log",
 				description: "The message you want to log",
-				defaultHardWrittenBareData: "Hello World !",
-				defaultHardWrittenVariableData: "value",
+			},
+			{
+				type: "number",
+				name: "To Log",
+				description: "The message you want to log",
 			}],
 	},
 };
