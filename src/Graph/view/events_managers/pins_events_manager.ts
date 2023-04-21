@@ -247,12 +247,22 @@ style="transform: translate(${event.clientX}px, ${event.clientY}px);">
 	inputPinContextMenu.addEventListener("mousemove", function () {
 		deletePinToolTip();
 	});
+	
+	if (optionsValues == "") {
+		variableDataSwitch.checked = false;
+		bareDataSwitch.checked = true;
+	}
 
 	bareDataSwitch.addEventListener("change", function () {
 		bareData.disabled = !bareDataSwitch.checked;
 		variableData.disabled = bareDataSwitch.checked;
 	});
 	variableDataSwitch.addEventListener("change", function () {
+		if (optionsValues == "") {
+			variableDataSwitch.checked = false;
+			bareDataSwitch.checked = true;
+			return;
+		}
 		bareData.disabled = variableDataSwitch.checked;
 		variableData.disabled = !variableDataSwitch.checked;
 	});
