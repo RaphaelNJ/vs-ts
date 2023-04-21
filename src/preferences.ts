@@ -1,5 +1,5 @@
-import { Preferences } from "./Graph/core/types";
-import { VsNode, Container } from "./Graph/core/types";
+import { Preferences } from "./types";
+import { VsNode, Container } from "./types";
 
 let nodeGenerator = (Node: VsNode, nodeUID: string): string => {
 	let inputPins = "";

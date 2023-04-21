@@ -1,15 +1,3 @@
-body {
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	width: 100vw;
-	user-select: none !important;
-	cursor: default;
-}
-
 #VSCanvasContainer {
 	padding: 0;
 	height: 600px;

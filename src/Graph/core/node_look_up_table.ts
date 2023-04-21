@@ -3,7 +3,7 @@
 // |   Variables Declaration           |
 // |                                   |
 // +-----------------------------------+
-import * as VsT from "./types";
+import * as VsT from "../../types";
 
 let nodeLookupTable: VsT.NodeLookupTable = {
 	Enter: <VsT.NodeType>{

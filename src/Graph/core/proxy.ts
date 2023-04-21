@@ -1,4 +1,4 @@
-import { ModificationType } from "./types";
+import { ModificationType } from "../../types";
 
 // +-----------------------------------+
 // |                                   |

@@ -3,7 +3,7 @@ import * as GraphManager from "../../core/graph_manager";
 import { project_preferences } from "../../../preferences";
 import { convertCanvasPosToGraphPos } from "../event_listeners";
 import { getIdOfParentWithProperty } from "../html_tools";
-import { variablesList } from "../../../main";
+import { variablesList } from "../../../Variables/variables_list";
 
 let mousePos: { x: number; y: number };
 let isPanningConnection: boolean;
@@ -198,7 +198,7 @@ function configureInputPinMenu(event: MouseEvent, target: HTMLElement): void {
 			target.getAttribute("vs-pin-data-mode") == "2" ? "" : "disabled"
 		} />`;
 	} else if (stringObjects.includes(data.details.type)) {
-		bareDataInput = `<input type="text" id="bareData" placeholder="Bare Data" value="${data.hardWrittenBareData}" ${
+		bareDataInput = `<input type="text" id="bareData" placeholder="Bare Data" value="${data.hardWrittenBareData.replaceAll('"', "&quot;").replaceAll('<', "&lt;")}" ${
 			target.getAttribute("vs-pin-data-mode") == "2" ? "" : "disabled"
 		} />`;
 	}
@@ -206,7 +206,7 @@ function configureInputPinMenu(event: MouseEvent, target: HTMLElement): void {
 	let optionsValues = "";
 	Object.keys(variablesList).forEach((e) => {
 		if (variablesList[e].type == data?.details.type) {
-			optionsValues += `<option value="${e}" ${data?.hardWrittenVariableData == e ? "selected" : ""}>${e}</option>`;
+			optionsValues += `<option value="${e.replaceAll('"', "&quot;").replaceAll('<', "&lt;")}" ${data?.hardWrittenVariableData == e ? "selected" : ""}>${e}</option>`;
 		}
 	});
 	tempDiv.innerHTML = `
@@ -247,7 +247,7 @@ style="transform: translate(${event.clientX}px, ${event.clientY}px);">
 	inputPinContextMenu.addEventListener("mousemove", function () {
 		deletePinToolTip();
 	});
-	
+
 	if (optionsValues == "") {
 		variableDataSwitch.checked = false;
 		bareDataSwitch.checked = true;
@@ -282,9 +282,9 @@ function displayPinToolTip(x: number, y: number, datamode: number, data: string,
 	}
 	tempDiv.innerHTML = `
 <div id="PinToolTip" style="top: ${y + offset}px; left: ${x + offset}px;">
-	<div>${stringDataMode}</div>
-	${datamode == 0 ? "" : `<div>type: ${type}</div>`}
-	${datamode == 0 ? "" : `<div>${addEllipsis(data, 24)}</div>`}
+	<div>${stringDataMode.replaceAll('"', "&quot;").replaceAll('<', "&lt;")}</div>
+	${datamode == 0 ? "" : `<div>type: ${type.replaceAll('"', "&quot;").replaceAll('<', "&lt;")}</div>`}
+	${datamode == 0 ? "" : `<div>${addEllipsis(data, 24).replaceAll('"', "&quot;").replaceAll('<', "&lt;")}</div>`}
 </div>`;
 	document.documentElement.append(tempDiv.children[0] as HTMLElement);
 }
