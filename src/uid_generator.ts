@@ -1,4 +1,4 @@
-import { project_preferences } from "../../preferences";
+import { project_preferences } from "./preferences";
 
 export let existingIDs: string[] = [];
 export let importedExistingIDs: string[] = [];

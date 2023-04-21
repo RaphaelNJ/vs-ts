@@ -1,7 +1,7 @@
 import * as VsT from "../../types";
 import { nodeLookupTable } from "./node_look_up_table";
 import { Graph } from "./graph";
-import * as uidTools from "./uid_generator";
+import * as uidTools from "../../uid_generator";
 import { project_preferences } from "../../preferences";
 import * as Containers from "../view/events_managers/containers_events_manager";
 import "toolcool-color-picker";
@@ -41,7 +41,7 @@ export function createNode(id: string, x: number, y: number): string {
 			details: nodeLookupTable[id].inputPin[i],
 			hardWrittenBareData: nodeLookupTable[id].inputPin[i].defaultHardWrittenBareData,
 			hardWrittenVariableData: nodeLookupTable[id].inputPin[i].defaultHardWrittenVariableData,
-			DataMode: 0,
+			DataMode: 2,
 		};
 	}
 	Graph.nodes[uid] = {

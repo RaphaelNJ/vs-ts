@@ -6,10 +6,10 @@ export function addEventsListeners(VariableListContainer: HTMLElement): void {
 	document.addEventListener("click", onClick);
 }
 function onClick(event: MouseEvent): void {
-	if ((event.target as HTMLElement).classList.contains("delete-btn")) {
+	if ((event.target as HTMLElement).classList.contains("var-delete-btn")) {
 		delete variablesList[(event.target as HTMLElement).getAttribute("vs-var-id") as string];
 		document.getElementById("varlist-" + (event.target as HTMLElement).getAttribute("vs-var-id"))?.remove();
-	} else if ((event.target as HTMLElement).classList.contains("create-btn")) {
+	} else if ((event.target as HTMLElement).classList.contains("var-create-btn")) {
 		loadPopup(
 			"Ajouter une variable",
 			`
@@ -21,10 +21,10 @@ function onClick(event: MouseEvent): void {
 			<option value="number" >Number</option>
 			<option value="object" >Object</option>
 		</select>
-		<button class="save-btn">Ajouter</button>
+		<button class="var-save-btn">Ajouter</button>
 		`
 		);
-	} else if ((event.target as HTMLElement).classList.contains("save-btn")) {
+	} else if ((event.target as HTMLElement).classList.contains("var-save-btn")) {
 		let varName = (document.getElementById("createVariableName") as HTMLInputElement).value;
 		let varType = (document.getElementById("createVariableType") as HTMLSelectElement).value;
 		variablesList[varName] = {
@@ -45,7 +45,7 @@ varType == "boolean"
 ? `<input class="variables" vs-var-name="${varName}" type="checkbox" checked>`
 : `<input class="variables" vs-var-name="${varName}" type="text" value="">`
 }</td>
-<td><button vs-var-id="${varName}" class="delete-btn ">Supprimer</button></td>
+<td><button vs-var-id="${varName}" class="var-delete-btn ">X</button></td>
 </tr>
 `+variableTBody.innerHTML;
 	}

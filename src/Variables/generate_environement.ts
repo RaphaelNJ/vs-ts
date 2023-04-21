@@ -28,10 +28,10 @@ export function initHtml(Container: HTMLElement, variablesList: VariablesList): 
 						? `<input class="variables" vs-var-name="${e}" type="checkbox" ${variablesList[e].value == "true" ? "checked" : ""}>`
 						: `<input class="variables" vs-var-name="${e}" type="text" value="${variablesList[e].value}">`
 				}</td>
-				<td><button vs-var-id="${e}" class="delete-btn ">Supprimer</button></td>
+				<td><button vs-var-id="${e}" class="var-delete-btn ">X</button></td>
 			</tr>`;
 	});
-	table += `<tr><td colspan="4"><button class="create-btn">+ Add</button></td></tr></tbody></table>`;
+	table += `<tr><td colspan="4"><button class="var-create-btn">+ Add</button></td></tr></tbody></table>`;
 
 	VariableListContainer.innerHTML = table;
 
