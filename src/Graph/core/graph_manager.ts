@@ -1,4 +1,4 @@
-import * as VsT from "./types";
+import * as VsT from "../../types";
 import { nodeLookupTable } from "./node_look_up_table";
 import { Graph } from "./graph";
 import * as uidTools from "./uid_generator";
