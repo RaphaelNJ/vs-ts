@@ -46,8 +46,8 @@ type DataInputPin = {
 	details: DataInputPinDetails;
 	hardWrittenBareData: string;
 	hardWrittenVariableData: string;
-	DataMode: number; // Dans quel mode est le pin. Modes possibles :
-	//                      0: Connection (default) -> Il reçois sa donnée depuis une connection (existante ou non)
+	DataMode: number | null; // Dans quel mode est le pin. Modes possibles :
+	//                      0 ou null: Connection (default) -> Il reçois sa donnée depuis une connection (existante ou non)
 	//                      1: Variable -> Il reçoit sa donnée depuis une variable | dans ce cas là, on se réfère à hardWrittenVariableData
 	//                      2: Bare -> Sa donnée est hardcodée | dans ce cas là, on se réfère à hardWrittenBareData
 };
@@ -133,18 +133,40 @@ type Preferences = {
 	}
 }
 
-enum ModificationType {
-	CREATED = "created",
-	UPDATED = "updated",
-	DELETED = "deleted",
-}
-
 
 type VariablesList = {
 	[key: string]: {
 		type: string;
 		value: any;
 	};
+}
+
+type FunctionProps = {
+	description: string;
+	inputs: {
+		name: string;
+		description: string;
+		type: string;
+		defaultValue: string;
+	}[];
+	outputs: {
+		name: string;
+		description: string;
+		type: string;
+	}[];
+	Graph: Graph | null;
+	internalVariables : VariablesList;
+}
+
+type FunctionsList = {
+	[key: string]: FunctionProps
+}
+
+
+enum ModificationType {
+	CREATED = "created",
+	UPDATED = "updated",
+	DELETED = "deleted",
 }
 
 export type {
@@ -163,5 +185,7 @@ export type {
 	Graph,
 	Preferences,
 	VariablesList,
+	FunctionProps,
+	FunctionsList,
 };
 export { ModificationType };

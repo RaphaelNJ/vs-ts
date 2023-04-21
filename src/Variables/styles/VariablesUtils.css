@@ -29,7 +29,7 @@ input[type="checkbox"].variables {
 	width: auto;
 	margin-top: 0;
 }
-.delete-btn, .create-btn, .save-btn {
+.var-delete-btn, .var-create-btn, .var-save-btn {
 	background-color: #f44336;
 	color: white;
 	border: none;
@@ -37,16 +37,16 @@ input[type="checkbox"].variables {
 	padding: 8px 16px;
 	border-radius: 4px;
 }
-.delete-btn:hover {
+.var-delete-btn:hover {
 	background-color: #d32f2f;
 }
-.create-btn {
+.var-create-btn {
 	background-color: #38b627;
 }
-.create-btn:hover {
+.var-create-btn:hover {
 	background-color: #28a423;
 }
-.save-btn {
+.var-save-btn {
 	background-color: #364cf4;
 }
 .save-btn:hover {

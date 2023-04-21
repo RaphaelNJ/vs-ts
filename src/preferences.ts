@@ -9,7 +9,7 @@ let nodeGenerator = (Node: VsNode, nodeUID: string): string => {
 		inputPins += `<div class="NodePin ExecutionPin" vs-is-pin="true" vs-pin-name="${Node.executionInputPin[pin].name}" vs-is-exe-pin="true" vs-pin-uid="${pin}" vs-node-uid="${nodeUID}"></div>`;
 	});
 	Object.keys(Node.inputPin).forEach((pin) => {
-		inputPins += `<div class="NodePin" vs-pin-data="${Node.inputPin[pin].hardWrittenBareData}" vs-pin-data-mode="2" vs-is-pin="true" vs-pin-name="${Node.inputPin[pin].details.name}" vs-is-exe-pin="false" vs-pin-type="${Node.inputPin[pin].details.type}" vs-pin-uid="${pin}" vs-node-uid="${nodeUID}"></div>`;
+		inputPins += `<div class="NodePin" vs-pin-data="${Node.inputPin[pin].DataMode == 2 ? Node.inputPin[pin].hardWrittenBareData : Node.inputPin[pin].hardWrittenVariableData}" vs-pin-data-mode="${Node.inputPin[pin].DataMode}" vs-is-pin="true" vs-pin-name="${Node.inputPin[pin].details.name}" vs-is-exe-pin="false" vs-pin-type="${Node.inputPin[pin].details.type}" vs-pin-uid="${pin}" vs-node-uid="${nodeUID}"></div>`;
 	});
 	Object.keys(Node.executionOutputPin).forEach((pin) => {
 		outputPins += `<div class="NodePin ExecutionPin" vs-is-pin="true" vs-pin-name="${Node.executionOutputPin[pin].name}" vs-is-exe-pin="true" vs-pin-uid="${pin}" vs-node-uid="${nodeUID}"></div>`;

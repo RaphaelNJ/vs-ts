@@ -1,9 +1,6 @@
 import * as VsT from "../../types";
-import { existingIDs as importedExistingIDs } from "./uid_generator";
 import { createProxy } from "./proxy";
 import { onGraphChanged } from "../view/graph_update_handler";
-import { initHtml } from "../view/generate_environement";
-import { addEventsListeners } from "../view/event_listeners";
 
 export let Graph: VsT.Graph = createProxy(
 	{
@@ -20,15 +17,6 @@ export let Graph: VsT.Graph = createProxy(
 	onGraphChanged
 );
 
-export function saveGraph(): string {
-	return btoa(JSON.stringify({ Graph: Graph, existingIDs: importedExistingIDs }));
-}
-export function loadGraph(data: string, GraphContainer: HTMLElement): void {
-	let load = JSON.parse(atob(data));
-
-	Graph = createProxy(load.Graph,
-		onGraphChanged
-	);
-	Object.assign(importedExistingIDs, load.existingIDs);
-	addEventsListeners(initHtml(GraphContainer));
+export function changeGraph(changedGraph: VsT.Graph): void {
+	Graph = createProxy(changedGraph,onGraphChanged);
 }
