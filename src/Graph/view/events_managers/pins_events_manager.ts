@@ -95,6 +95,14 @@ export function onMouseUp(event: MouseEvent, target: HTMLElement): void {
 			target.getAttribute("vs-node-uid")?.toString() || "",
 			target.getAttribute("vs-pin-uid")?.toString() || ""
 		);
+		deletePinToolTip();
+		displayPinToolTip(
+			event.clientX,
+			event.clientY,
+			parseInt(target.getAttribute("vs-pin-data-mode") || "0"),
+			target.getAttribute("vs-pin-data") || "",
+			target.getAttribute("vs-pin-type") || "",
+		);
 	}
 	isPanningConnection = false;
 	VSCurrentConnectionPath = document.getElementById("VSCurrentConnectionPath")!;
@@ -136,7 +144,19 @@ export function onContextMenu(event: MouseEvent, target: HTMLElement): boolean {
 	}
 	return true;
 }
-export function onWheel(event: WheelEvent, target: HTMLElement): void {}
+export function onWheel(event: WheelEvent, target: HTMLElement): void {
+	if (Graph.nodes[target.getAttribute("vs-node-uid") || ""]?.inputPin[target.getAttribute("vs-pin-uid") || ""] == undefined) {
+		deletePinToolTip();
+	} else {
+		displayPinToolTip(
+			event.clientX,
+			event.clientY,
+			parseInt(target.getAttribute("vs-pin-data-mode") || "0"),
+			target.getAttribute("vs-pin-data") || "",
+			target.getAttribute("vs-pin-type") || "",
+		);
+	}
+}
 
 /**
  * convert e.clientX and e.clientY to graph coordinates
