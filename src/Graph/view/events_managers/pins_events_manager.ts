@@ -238,7 +238,9 @@ style="transform: translate(${event.clientX}px, ${event.clientY}px);">
 	});
 }
 function displayPinToolTip(x: number, y: number, datamode: number, data: string, type: string): void {
-	deletePinToolTip();
+	let offset = 5;
+	let pinToolTip = document.getElementById("PinToolTip");
+	if (pinToolTip == null) {
 	let tempDiv = document.createElement("div");
 	let stringDataMode = "";
 	if (datamode == 1) {
@@ -249,13 +251,17 @@ function displayPinToolTip(x: number, y: number, datamode: number, data: string,
 		stringDataMode = "Connection Data";
 	}
 	tempDiv.innerHTML = `
-<div id="PinToolTip" style="top: ${y + 5}px; left: ${x + 5}px;">
+<div id="PinToolTip" style="top: ${y + offset}px; left: ${x + offset}px;">
 	<div>${stringDataMode}</div>
 	${datamode == 0 ? "" : `<div>type: ${type}</div>`}
 	${datamode == 0 ? "" : `<div>${addEllipsis(data, 24)}</div>`}
 </div>`;
 	document.documentElement.append(tempDiv.children[0] as HTMLElement);
 }
+else {
+	pinToolTip.style.top = y + offset + "px";
+	pinToolTip.style.left = x + offset + "px";
+}}
 function deletePinToolTip() {
 	document.getElementById("PinToolTip")?.remove();
 }
