@@ -7,12 +7,7 @@ export let functionsList: FunctionsList = {
 		inputs: [],
 		outputs: [],
 		Graph: null,
-		internalVariables: {
-			string: {
-				type: "string",
-				value: "string",
-			},
-		},
+		internalVariables: {},
 	},
     // "function 1": {
 	// 	description: "function 1",

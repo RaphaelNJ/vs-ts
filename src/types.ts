@@ -145,13 +145,10 @@ type FunctionProps = {
 	description: string;
 	inputs: {
 		name: string;
-		description: string;
 		type: string;
-		defaultValue: string;
 	}[];
 	outputs: {
 		name: string;
-		description: string;
 		type: string;
 	}[];
 	Graph: Graph | null;

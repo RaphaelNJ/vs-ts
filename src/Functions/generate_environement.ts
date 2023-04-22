@@ -21,11 +21,11 @@ export function initHtml(Container: HTMLElement, functionsList: FunctionsList): 
 	Object.keys(functionsList).forEach((e) => {
 		table += `
 		<tr id="funlist-${e}">
-				<td><button vs-fun-id="${e}" class="fun-open-btn">${e}</button></td>
-				${e == "main" ? "" : `<td><button vs-fun-id="${e}" class="fun-delete-btn">X</button></td>`}
+				<td><button vs-fun-id="${e}" class="fun-open-btn open-btn">${e}</button></td>
+				${e == "main" ? "" : `<td><button vs-fun-id="${e}" class="fun-delete-btn delete-btn">X</button></td>`}
 			</tr>`;
 	});
-	table += `<tr><td colspan="4"><button class="fun-create-btn">+ Add</button></td></tr></tbody></table>`;
+	table += `<tr><td colspan="4"><button class="fun-create-btn create-btn">+ Add</button></td></tr></tbody></table>`;
 
 	FunctionsListContainer.innerHTML = table;
 
