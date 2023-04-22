@@ -1,37 +1,4 @@
-
 import { ContextMenu } from "./context_menu"; // Modification ici
-
-let elements = {
-	"Enter": {
-		type: "element",
-		defaultCode: "",
-		codes: {
-			text: "Enter Node",
-		},
-	},
-    "Test": {
-		type: "element",
-		defaultCode: "",
-		codes: {
-			text: "Test Node",
-		},
-	},
-    "Container": {
-		type: "element",
-		defaultCode: "",
-		codes: {
-			text: "Container",
-		},
-	},
-
-};
-
-
-
-let arrengement = [
-    "Test",
-    "Container"
-]
 
 let DefaultsCM = {
 	OsWindows: {
@@ -80,6 +47,59 @@ let template = DefaultsCM.Dark;
 let embedVariables = {
 	imgSrc: '<img class="menu-image" src="{= Variable =}">',
 };
+
+let elements = {
+	Enter: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "Enter Node",
+		},
+	},
+	Test: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "Test Node",
+		},
+	},
+	Container: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "Container",
+		},
+	},
+};
+
+let arrengement = [
+	"Test",
+	"Container",
+	{
+		defaultCode: "",
+		codes: {
+			text: "Functions",
+			suffix: ">",
+		},
+		options: [],
+	},
+];
+
+export function addFunctionToCM(Name) {
+    elements[Name] = {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: Name,
+		},
+	}
+	arrengement[2].options.forEach((e, i) => {
+		if (e == Name) {
+			delete arrengement[2].options[i]
+		}
+	})
+    arrengement[2].options.push(Name);
+}
 
 export function invokeCM(x,y,cb) {
 	ContextMenu({

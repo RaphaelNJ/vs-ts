@@ -1,7 +1,7 @@
 #VSCanvasContainer {
 	padding: 0;
-	height: 600px;
-	width: 600px;
+	height: 100%;
+	width: 100%;
 	object-fit: cover;
 	overflow: hidden;
 	border: black solid 1px;

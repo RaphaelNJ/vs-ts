@@ -106,6 +106,25 @@ let nodeLookupTable: VsT.NodeLookupTable = {
 				description: "The message you want to log",
 			}],
 	},
+	Return: <VsT.NodeType>{
+		title: "Return",
+		description: "",
+		otherProperties: {
+			isClosable: false,
+			isDraggable: true,
+			isResizable: false,
+			code: "",
+		},
+		executionInputPin: [
+			{
+				name: "Finish Your code here and return something",
+				description: "",
+			}
+		],
+		executionOutputPin: [],
+		inputPin: [],
+		outputPin: [],
+	},
 };
 
 export { nodeLookupTable };

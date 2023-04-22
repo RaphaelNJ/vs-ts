@@ -21,7 +21,7 @@ function onClick(event: MouseEvent): void {
 			<option value="number" >Number</option>
 			<option value="object" >Object</option>
 		</select>
-		<button class="var-save-btn">Ajouter</button>
+		<button class="var-save-btn save-btn">Ajouter</button>
 		`
 		);
 	} else if ((event.target as HTMLElement).classList.contains("var-save-btn")) {
@@ -35,25 +35,33 @@ function onClick(event: MouseEvent): void {
 		const variableTBody = document.getElementById("variableTBody");
 
 		if (variableTBody) {
-			document.getElementById("varlist-"+varName)?.remove();
-			variableTBody.innerHTML = `
+			document.getElementById("varlist-" + varName)?.remove();
+			variableTBody.innerHTML =
+				`
 <tr id="varlist-${varName}">
-<td>${varName}</td>
-<td>${varType}</td>
-<td>${
-varType == "boolean"
-? `<input class="variables" vs-var-name="${varName}" type="checkbox" checked>`
-: `<input class="variables" vs-var-name="${varName}" type="text" value="">`
-}</td>
-<td><button vs-var-id="${varName}" class="var-delete-btn ">X</button></td>
+	<td>${varName}</td>
+	<td>${varType}</td>
+	<td>${ varType == "boolean" ?
+		`<input class="variables" vs-var-name="${varName}" type="checkbox">`
+		: `<input class="variables" vs-var-name="${varName}" type="text" value="">`}</td>
+	<td>
+		<button vs-var-id="${varName}" class="var-delete-btn ">X</button>
+	</td>
 </tr>
-`+variableTBody.innerHTML;
+` + variableTBody.innerHTML;
+			if (varType == "boolean") {
+				variablesList[varName].value = "false";
+			}
+		}
 	}
-}
 }
 function onChange(event: Event): void {
 	let varName = (event.target as HTMLElement).getAttribute("vs-var-name") || "";
 	if (variablesList[varName]) {
-		variablesList[varName].value = (event.target as HTMLInputElement).value;
+		if ((event.target as HTMLInputElement).type == "checkbox") {
+			variablesList[varName].value = (event.target as HTMLInputElement).checked ? "true" : "false";
+		} else {
+			variablesList[varName].value = (event.target as HTMLInputElement).value;
+		}
 	}
 }

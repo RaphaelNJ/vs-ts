@@ -31,7 +31,7 @@ export function initHtml(Container: HTMLElement, variablesList: VariablesList): 
 				<td><button vs-var-id="${e}" class="var-delete-btn ">X</button></td>
 			</tr>`;
 	});
-	table += `<tr><td colspan="4"><button class="var-create-btn">+ Add</button></td></tr></tbody></table>`;
+	table += `<tr><td colspan="4"><button class="var-create-btn create-btn">+ Add</button></td></tr></tbody></table>`;
 
 	VariableListContainer.innerHTML = table;
 

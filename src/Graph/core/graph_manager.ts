@@ -27,6 +27,7 @@ export function createNode(id: string, x: number, y: number): string {
 	let outputPin: { [key: string]: VsT.DataOutputPinDetails } = {};
 	let inputPin: { [key: string]: VsT.DataInputPin } = {};
 
+	console.log(nodeLookupTable, id)
 	for (let i = 0; i < nodeLookupTable[id].executionInputPin.length; i++) {
 		executionInputPin[uidTools.generateUID()] = nodeLookupTable[id].executionInputPin[i];
 	}

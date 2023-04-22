@@ -1,22 +1,66 @@
 body {
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	height: 100vh;
 	width: 100vw;
 	user-select: none !important;
-	cursor: default;
 }
 
 #app {
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#template-top-line {
+	background-color: #333;
+	height: 5%;
+	min-height: 1.2em;
+	max-height: 2.3em;
+	width: 100%;
+    display: flex;
+    align-items: center;
+}
+#template-top-line > * {
+	margin-left: 15px;
+}
+
+#template-container {
+	display: flex;
+	height: calc(100% - 2.3em);
+}
+
+#template-left-panel,
+#template-right-panel {
+	background-color: #f0f0f0;
+	width: 15%;
+	height: 100%;
+}
+
+#template-middle-panel {
+	background-color: #fff;
+	width: 70%;
+	height: 100%;
+}
+
+
+#HeaderFunctionName {
+	color: white;
+}
+
+#popupTitle {
+	margin-bottom: 1em;
+}
+
+#DetailsFunctionTables {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	margin-top: 1em;
 	align-items: center;
-	flex-wrap: nowrap;
-	overflow: hidden;
+	justify-content: center;
+	gap: 1em;
 }
 
 .popup-overlay {
@@ -39,8 +83,6 @@ body {
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	width: 80%;
-	max-width: 400px;
 }
 
 .close-popup {
@@ -55,4 +97,47 @@ body {
 
 .close-popup:hover {
 	color: red;
+}
+input[type="text"],
+input[type="number"],
+input[type="checkbox"] {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	font-size: 16px;
+	margin-top: 5px;
+}
+
+input[type="checkbox"] {
+	width: auto;
+	margin-top: 0;
+}
+.delete-btn, .create-btn, .save-btn, .open-btn {
+	background-color: #f44336;
+	color: white;
+	border: none;
+	cursor: pointer;
+	padding: 8px 16px;
+	border-radius: 4px;
+}
+.var-delete-btn:hover {
+	background-color: #d32f2f;
+}
+.create-btn {
+	background-color: #38b627;
+}
+.create-btn:hover {
+	background-color: #28a423;
+}
+.save-btn, .open-btn {
+	background-color: #364cf4;
+}
+.save-btn:hover, .open-btn:hover {
+	background-color: #2f4ad3;
+}
+td:nth-child(even) {
+	background-color: #f4f4f4;
 }
