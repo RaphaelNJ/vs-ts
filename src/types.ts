@@ -7,6 +7,7 @@
 // +----------------- Les propriétées de chaques pins -----------------+
 type PinType = string;
 type DataInputPinDetails = {
+	id: string;
 	type: PinType;
 	name: string;
 	description: string;
@@ -14,6 +15,7 @@ type DataInputPinDetails = {
 	defaultHardWrittenVariableData: string;
 };
 type DataOutputPinDetails = {
+	id: string;
 	type: PinType;
 	name: string;
 	description: string;
@@ -23,12 +25,14 @@ type ExecutionInputPinDetails = {
 	description: string;
 };
 type ExecutionOutputPinDetails = {
+	id: string;
 	name: string;
 	description: string;
 };
 
 // +----------------- LookupTable Des Nodes disponibles -----------------+
 type NodeType = {
+	id: string;
 	title: string;
 	description: string;
 	executionInputPin: ExecutionInputPinDetails[];
