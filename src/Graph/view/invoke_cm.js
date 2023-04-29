@@ -70,11 +70,59 @@ let elements = {
 			text: "Container",
 		},
 	},
+	Say: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "Say",
+		},
+	},
+	Ask: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "Ask",
+		},
+	},
+	sameString: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "sameString",
+		},
+	},
+	IfElse: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "IfElse",
+		},
+	},
+	SetStringVar: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "SetStringVar",
+		},
+	},
+	AddStrings: {
+		type: "element",
+		defaultCode: "",
+		codes: {
+			text: "AddStrings",
+		},
+	}
 };
 
 let arrengement = [
 	"Test",
 	"Container",
+	"Say",
+	"Ask",
+	"sameString",
+	"IfElse",
+	"SetStringVar",
+	"AddStrings",
 	{
 		defaultCode: "",
 		codes: {
@@ -86,22 +134,22 @@ let arrengement = [
 ];
 
 export function addFunctionToCM(Name) {
-    elements[Name] = {
+	elements[Name] = {
 		type: "element",
 		defaultCode: "",
 		codes: {
 			text: Name,
 		},
-	}
-	arrengement[2].options.forEach((e, i) => {
+	};
+	arrengement[8].options.forEach((e, i) => {
 		if (e == Name) {
-			delete arrengement[2].options[i]
+			delete arrengement[8].options[i];
 		}
-	})
-    arrengement[2].options.push(Name);
+	});
+	arrengement[8].options.push(Name);
 }
 
-export function invokeCM(x,y,cb) {
+export function invokeCM(x, y, cb) {
 	ContextMenu({
 		elements: elements,
 		arrengement: arrengement,
