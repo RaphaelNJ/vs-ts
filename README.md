@@ -24,6 +24,7 @@ npm run dev
 
 Le suivant est une présentation du fonctionnement et de l'utilisation de ce logiciel en l'état: 
 
+https://github.com/RaphaelNJ/vs-ts/assets/52333330/22908fe3-b83c-48bb-8ac7-7cff730fb065
 
 ## Limitations
 Ce projet est basé sur un [prototype](https://github.com/RaphaelNJ/VisualScripting.js) écrit en javascript. Il est bien plus complet que ce dernier mais pas encore terminé. Un projet plus [récent que celui-ci](https://github.com/RaphaelNJ/vs_rs) est en cours de création.
